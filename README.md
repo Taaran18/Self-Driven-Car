@@ -101,9 +101,15 @@ Contributions to this project are welcome! If you find any bugs or have suggesti
 
 ### Project Contributors
 
-- [Taran Jain](https://github.com/Taaran18)
-- [Vikas Sharma](https://github.com/vikasharma005)
-- [Tanishq Soni](https://github.com/TanishqSoni2003)
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><a href="https://github.com/Taaran18"><img src="https://avatars.githubusercontent.com/u/82564029?v=4" width="100px;" alt="Taran Jain"/><br /><sub><b>Taran Jain</b></sub></a></td>
+      <td align="center"><a href="https://github.com/vikasharma005"><img src="https://avatars.githubusercontent.com/u/93978146?v=4" width="100px;" alt="Vikas Sharma"/><br /><sub><b>Vikas Sharma</b></sub></a></td>
+      <td align="center"><a href="https://github.com/TanishqSoni2003"><img src="https://avatars.githubusercontent.com/u/94300460?v=4" width="100px;" alt="Tanishq Soni"/><br /><sub><b>Tanishq Soni</b></sub></a></td>
+    </tr>
+  </table>
+</div>
 
 ## License 📄
 
