@@ -4,7 +4,7 @@ class vect2d:
         self.y = y
         self.angle = angle
 
-    def co(self, x,y):
+    def co(self, x, y):
         self.x = x
         self.y = y
 
