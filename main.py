@@ -25,7 +25,6 @@ def draw_win(cars, road, world, GEN):
     world.win.blit(text, (world.win_width - text.get_width() - 10, 10))
     text = STAT_FONT.render("Gen: " + str(GEN), 1, BLACK)
     world.win.blit(text, (world.win_width - text.get_width() - 10, 50))
-
     world.bestNN.draw(world)
 
     py.display.update()
@@ -86,7 +85,7 @@ def main(genomes=[], config=[]):
                 or y > world.getBestCarPos()[1] + BAD_GENOME_TRESHOLD
                 or y > y_old
                 or car.vel < 0.1
-            ):  # il t serve a evitare di eliminare macchine nei primi tot frame (nei primi frame getCollision() restituisce sempre true)
+            ):
                 ge[i].fitness -= 1
                 cars.pop(i)
                 nets.pop(i)
@@ -113,7 +112,6 @@ def main(genomes=[], config=[]):
         draw_win(cars, road, world, GEN)
 
 
-# NEAT function
 def run(config_path):
     config = neat.config.Config(
         neat.DefaultGenome,

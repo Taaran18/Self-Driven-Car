@@ -41,7 +41,6 @@ class Car:
         )
 
     def detectCollision(self, road):
-        # get mask
         mask = py.mask.from_surface(self.img)
         (width, height) = mask.get_size()
         for v in [road.pointsLeft, road.pointsRight]:
@@ -114,8 +113,6 @@ class Car:
             self.vel = 0
         self.x = self.x + self.vel * sin(radians(self.rot))
         self.y = self.y - self.vel * cos(radians(self.rot))
-
-        # print("coord: ("+str(self.x)+", "+str(self.y)+")   vel: "+str(self.vel)+"   acc: "+str(self.acc) + "    rot: "+str(self.rot))
 
         return (self.x, self.y)
 
