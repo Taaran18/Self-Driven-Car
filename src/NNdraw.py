@@ -1,8 +1,8 @@
 import pygame as py
-from config_variables import *
-from car import decodeCommand
-from vect2d import vect2d
-from node import *
+from config.config_variables import *
+from .car import decodeCommand
+from .vect2d import vect2d
+from .node import *
 
 py.font.init()
 

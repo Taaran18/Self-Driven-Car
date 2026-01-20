@@ -1,124 +1,75 @@
 # Self-Driven Car using NEAT 🚗🧠
 
 <div align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png" height="100">
-  <img src="https://www.pygame.org/docs/_images/pygame_logo.png" height="100">
-  <img src="https://numpy.org/images/logo.svg" height="100">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/SCIPY_2.svg/1200px-SCIPY_2.svg.png" height="100">
-  <img src="https://thumbs.dreamstime.com/b/machine-learning-icon-two-color-design-red-black-style-elements-icons-collection-creative-web-apps-software-print-144659464.jpg" height="100">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png" height="60" alt="Python">
+  <img src="https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png" height="60" alt="Streamlit">
+  <img src="https://www.pygame.org/docs/_images/pygame_logo.png" height="60" alt="Pygame">
+  <img src="https://numpy.org/images/logo.svg" height="60" alt="NumPy">
 </div>
 
-This project is a simulation of self-driving cars controlled by neural networks, implemented using the Python programming language and the Pygame library for graphics rendering. The cars navigate through a randomly generated road, and their neural networks are trained using the NEAT (NeuroEvolution of Augmenting Topologies) algorithm to learn how to drive successfully.
+<br>
 
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/16992394/205456901-c6330d6a-a96c-4f1f-a98e-8b7616b71df7.gif" width="500">
-</div>
+This project is a simulation of self-driving cars controlled by neural networks. It uses the **NEAT (NeuroEvolution of Augmenting Topologies)** algorithm to evolve a population of cars that learn to navigate a randomly generated track. The simulation is built with **Pygame** for the physics engine and features a modern **Streamlit** dashboard for monitoring and control.
 
-## Features ✨
+## ✨ Features
 
-- Simulation of self-driving cars controlled by neural networks
-- Randomly generated road with varying curvatures and slopes
-- Neural network training using the NEAT algorithm
-- Visualization of the neural network structure and connections
-- Real-time display of car positions, velocities, and sensor inputs
+*   **Beautful Dashboard**: A modern, minimalistic web interface built with Streamlit to control and view the simulation.
+*   **Headless Simulation**: The car physics runs in the background without needing a native window, making it perfect for web deployments.
+*   **Real-time Analytics**: Stick charts and metrics showing fitness progression, generation count, and population stats.
+*   **Modular Codebase**: Clean architecture with separated logic (`src/`), configuration (`config/`), and UI (`dashboard/`).
+*   **NEAT Integration**: Full implementation of genetic algorithms (mutation, crossover, speciation).
 
-## Neural Network Architecture 🧠
+## 📂 Project Structure
 
-The neural network architecture used in this simulation is a feed-forward network with the following structure:
-
-- **Input Layer**: 9 nodes
-  - 8 nodes representing the distances from the car to the road boundaries in 8 different directions
-  - 1 node representing the car's current velocity
-- **Hidden Layer**: Variable number of nodes, determined by the NEAT algorithm
-- **Output Layer**: 4 nodes
-  - 1 node for accelerating
-  - 1 node for braking
-  - 1 node for turning left
-  - 1 node for turning right
-
-The neural network takes the sensor inputs and the car's velocity as input and outputs four values representing the actions to be taken (accelerate, brake, turn left, or turn right).
-
-## Neural Network Calculation 🧮
-
-The neural network is calculated using the following steps:
-
-1. The sensor inputs and the car's velocity are fed into the input layer of the neural network.
-2. The input values are propagated through the hidden layer(s) using the weights and biases determined by the NEAT algorithm.
-3. The outputs of the hidden layer(s) are propagated to the output layer, producing four output values.
-4. The output values are interpreted as follows:
-   - The accelerate output determines whether the car should accelerate or not.
-   - The brake output determines whether the car should brake or not.
-   - The turn left and turn right outputs determine the direction the car should turn.
-5. The car's actions (accelerate, brake, turn left, or turn right) are executed based on the output values.
-
-The neural network is trained over multiple generations using the NEAT algorithm, which evolves the network's topology and weights to optimize the car's performance on the road.
-
-## Requirements 📋
-
-- Python 3.x (https://www.python.org/downloads/)
-- Pygame (https://www.pygame.org/news)
-- NumPy (https://numpy.org/)
-- SciPy (https://scipy.org/)
-- NEAT-Python (https://neat-python.readthedocs.io/en/latest/)
-
-## Installation 🚀
-
-1. Clone the repository or download the source code.
-
-```bash
-git clone https://github.com/Taaran18/Self-Driven-Car.git
+```text
+├── assets/          # Images and resources
+├── config/          # Configuration files (NEAT config, variables)
+├── dashboard/       # Streamlit dashboard code (app.py, reporter.py)
+├── src/             # Core simulation logic (car, road, world, etc.)
+├── main.py          # Legacy entry point for command line
+└── requirements.txt # Project dependencies
 ```
 
-2. Install the required dependencies using pip:
+## 🚀 Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/Taaran18/Self-Driven-Car.git
+    cd Self-Driven-Car
+    ```
+
+2.  Install the required dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## 🏃‍♂️ Usage
+
+### Option 1: Modern Dashboard (Recommended)
+Run the Streamlit app to view the simulation in your browser with real-time stats.
 
 ```bash
-pip install pygame numpy scipy neat-python
+streamlit run dashboard/app.py
 ```
+*   Click **▶ Start Simulation** in the sidebar.
+*   Monitor improvement in the **Analytics** tab.
 
-## Usage 🏃‍♂️
-
-1. Navigate to the project directory.
-
-```bash
-cd self-driven-car
-```
-
-2. Run the main script:
+### Option 2: Command Line
+Run the simulation in a native Pygame window (Legacy mode).
 
 ```bash
 python main.py
 ```
 
-The simulation will start, and you can observe the self-driving cars navigating through the road. The neural networks will be trained over multiple generations, and the best-performing car's neural network structure will be visualized.
+## 🧠 Neural Network inputs
+- 8 Ray-cast sensors measuring distance to road borders.
+- Current velocity.
 
-## Configuration ⚙️
+**Outputs:**
+- Accelerate, Brake, Turn Left, Turn Right.
 
-The simulation parameters and neural network configurations can be modified in the `config_variables.py` and `config_file.txt` files, respectively. Refer to the comments in these files for more information on the available settings.
+## 🤝 Contributing
+Contributions are welcome! Please open an issue or submit a pull request.
 
-## Contributing 🤝
-
-Contributions to this project are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
-
-### Project Contributors
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center"><a href="https://github.com/Taaran18"><img src="https://avatars.githubusercontent.com/u/82564029?v=4" width="100px;" alt="Taran Jain"/><br /><sub><b>Taran Jain</b></sub></a></td>
-      <td align="center"><a href="https://github.com/vikasharma005"><img src="https://avatars.githubusercontent.com/u/93978146?v=4" width="100px;" alt="Vikas Sharma"/><br /><sub><b>Vikas Sharma</b></sub></a></td>
-      <td align="center"><a href="https://github.com/TanishqSoni2003"><img src="https://avatars.githubusercontent.com/u/94300460?v=4" width="100px;" alt="Tanishq Soni"/><br /><sub><b>Tanishq Soni</b></sub></a></td>
-    </tr>
-  </table>
-</div>
-
-## License 📄
-
+## 📄 License
 This project is licensed under the [MIT License](LICENSE).
-
-## Acknowledgments 🙏
-
-This project was inspired by various neural network car simulations and tutorials available online. Special thanks to the creators of the Pygame library, NumPy, SciPy, and NEAT-Python for providing the necessary tools and libraries.
-
-## Support 🌟
-
-If you find this project useful, please consider giving it a ⭐️ on GitHub!

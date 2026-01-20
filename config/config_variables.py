@@ -4,7 +4,6 @@ py.font.init()
 
 
 # =================== General constants ==================================
-
 FPS = 30
 WIN_WIDTH = 1800
 WIN_HEIGHT = 1000
@@ -16,7 +15,6 @@ INPUT_NEURONS = 9
 OUTPUT_NEURONS = 4
 
 # =================== Car Specs ==========================================
-
 CAR_DBG = False
 FRICTION = -0.1
 MAX_VEL = 10
@@ -28,7 +26,6 @@ SENSOR_DISTANCE = 200
 ACTIVATION_TRESHOLD = 0.5
 
 # =================== Road Specs =========================================
-
 ROAD_DBG = False
 MAX_ANGLE = 1
 MAX_DEVIATION = 300
@@ -38,7 +35,6 @@ SAFE_SPACE = SPACING + 50
 ROAD_WIDTH = 200
 
 # =================== Display and Colors ==================================
-
 NODE_RADIUS = 20
 NODE_SPACING = 5
 LAYER_SPACING = 100
@@ -62,9 +58,7 @@ DARK_BLUE = (100, 100, 150)
 NODE_FONT = py.font.SysFont("comicsans", 15)
 STAT_FONT = py.font.SysFont("comicsans", 50)
 
-
 # =================== Constants for internal use ==================================
-
 GEN = 0
 
 ACC = 0

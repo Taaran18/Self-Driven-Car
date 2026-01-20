@@ -1,0 +1,6 @@
+pygame
+numpy
+scipy
+neat-python
+streamlit
+pandas

@@ -1,6 +1,6 @@
 import pygame as py
-from car import decodeCommand
-from config_variables import *
+from .car import decodeCommand
+from config.config_variables import *
 
 
 class Node:

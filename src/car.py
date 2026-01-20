@@ -1,11 +1,11 @@
-from config_variables import *
+from config.config_variables import *
 import pygame as py
 import os
 from math import *
 from random import random
-from road import *
+from .road import *
 import numpy as np
-from vect2d import vect2d
+from .vect2d import vect2d
 
 
 class Car:
@@ -28,13 +28,13 @@ class Car:
 
         self.img = py.transform.rotate(
             py.transform.scale(
-                py.image.load(os.path.join("imgs", name)).convert_alpha(), (120, 69)
+                py.image.load(os.path.join("assets", name)).convert_alpha(), (120, 69)
             ),
             -90,
         )
         self.brake_img = py.transform.rotate(
             py.transform.scale(
-                py.image.load(os.path.join("imgs", "brakes.png")).convert_alpha(),
+                py.image.load(os.path.join("assets", "brakes.png")).convert_alpha(),
                 (120, 69),
             ),
             -90,
