@@ -4,7 +4,7 @@ import numpy as np
 import os
 import sys
 
-# Add project root to path
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from dashboard.simulation import SimulationRunner, set_stop_simulation
@@ -50,7 +50,7 @@ st.markdown(
 st.title("Self-Driving Car Simulation")
 st.markdown("### Neural Evolution of Augmenting Topologies (NEAT)")
 
-# Sidebar controls
+
 st.sidebar.header("Control Panel")
 
 if st.sidebar.button("▶ Start Simulation", type="primary"):
@@ -63,7 +63,7 @@ if st.sidebar.button("⏹ Stop Simulation", type="secondary"):
 
 st.markdown("---")
 
-# Layout: Metrics at the top
+
 m1, m2, m3, m4 = st.columns(4)
 with m1:
     curr_gen = st.empty()
@@ -80,13 +80,13 @@ with m4:
 
 st.markdown("---")
 
-# Main content
+
 col1, col2 = st.columns([1.8, 1.2], gap="large")
 
 with col1:
     st.subheader("Live Feed")
     frame_placeholder = st.empty()
-    # Placeholder for the start image or waiting state
+
     if not st.session_state.get("running"):
         frame_placeholder.info("Click 'Start Simulation' in the sidebar to begin.")
 
@@ -102,18 +102,16 @@ with col2:
         st.caption("Detailed Statistics")
         stats_table = st.empty()
 
-# Run logic
+
 if st.session_state.get("running"):
     status_ind.metric("Status", "Running")
 
-    # Path to config
     config_path = os.path.join(
         os.path.dirname(__file__), "..", "config", "config_file.txt"
     )
 
     runner = SimulationRunner(config_path)
 
-    # We iterate through the simulation generator
     try:
         runner_iterator = runner.run()
 
@@ -122,16 +120,12 @@ if st.session_state.get("running"):
                 break
 
             if msg_type == "frame":
-                # Data is (W, H, 3) from surfarray.
-                # Need to rotate/flip because surfarray is usually transposed relative to standard image
-                # pygame.surfarray.array3d returns (width, height, 3) where x is width.
-                # Matrix representation (row, col) = (y, x).
-                # So we usually transpose (1, 0, 2) to get (Height, Width, 3)
+
                 frame = np.transpose(data, (1, 0, 2))
                 frame_placeholder.image(frame, channels="RGB", use_container_width=True)
 
             elif msg_type == "stats":
-                # Data is list of dicts
+
                 if data:
                     latest = data[-1]
                     curr_gen.metric("Generation", latest["Generation"])

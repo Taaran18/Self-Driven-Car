@@ -13,14 +13,13 @@ class NEATReporter(BaseReporter):
         self.generation_start_time = time.time()
 
     def post_evaluate(self, config, population, species, best_genome):
-        # Calculate statistics
+
         fitnesses = [c.fitness for c in population.values()]
         fit_mean = sum(fitnesses) / len(fitnesses)
         fit_std = (
             sum([(x - fit_mean) ** 2 for x in fitnesses]) / len(fitnesses)
         ) ** 0.5
 
-        # Store stats
         self.stats.append(
             {
                 "Generation": self.current_gen,
