@@ -39,7 +39,7 @@ pip install -r requirements.txt
 Experience the simulation with real-time analytics in your browser:
 
 ```bash
-streamlit run web/dashboard.py
+streamlit run web/app.py
 ```
 
 > [!TIP]
