@@ -1,9 +1,9 @@
-from config.config_variables import *
+from config.constants import *
 import pygame as py
 import numpy as np
 from scipy import interpolate
 from math import *
-from .vect2d import *
+from .vector import *
 from random import random, seed
 
 

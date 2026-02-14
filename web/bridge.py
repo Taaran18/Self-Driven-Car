@@ -6,12 +6,12 @@ import numpy as np
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src.car import Car
-from src.road import Road
-from src.world import World
-from src.NNdraw import NN
-from config.config_variables import *
-from dashboard.reporter import NEATReporter
+from engine.car import Car
+from engine.road import Road
+from engine.world import World
+from engine.nn_visualizer import NN
+from config.constants import *
+from web.reporter import NEATReporter
 
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 STOP_SIMULATION = False

@@ -3,11 +3,11 @@ import neat
 import time
 import os
 import random
-from src.car import Car
-from src.road import Road
-from src.world import World
-from src.NNdraw import NN
-from config.config_variables import *
+from engine.car import Car
+from engine.road import Road
+from engine.world import World
+from engine.nn_visualizer import NN
+from config.constants import *
 
 py.font.init()
 
@@ -132,5 +132,5 @@ def run(config_path):
 
 if __name__ == "__main__":
     local_dir = os.path.dirname(__file__)
-    config_path = os.path.join(local_dir, "config", "config_file.txt")
+    config_path = os.path.join(local_dir, "config", "neat.cfg")
     run(config_path)

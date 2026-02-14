@@ -1,75 +1,69 @@
-# Self-Driven Car using NEAT 🚗🧠
+# Self-Driving Car Simulation 🏎️🧠
 
-<div align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png" height="60" alt="Python">
-  <img src="https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png" height="60" alt="Streamlit">
-  <img src="https://www.pygame.org/docs/_images/pygame_logo.png" height="60" alt="Pygame">
-  <img src="https://numpy.org/images/logo.svg" height="60" alt="NumPy">
-</div>
+A high-performance self-driving car simulation powered by **NEAT** (NeuroEvolution of Augmenting Topologies). This project demonstrates how neural networks can evolve to master complex navigation tasks through genetic algorithms.
 
-<br>
+---
 
-This project is a simulation of self-driving cars controlled by neural networks. It uses the **NEAT (NeuroEvolution of Augmenting Topologies)** algorithm to evolve a population of cars that learn to navigate a randomly generated track. The simulation is built with **Pygame** for the physics engine and features a modern **Streamlit** dashboard for monitoring and control.
+## 🌟 Key Features
 
-## ✨ Features
-
-*   **Beautful Dashboard**: A modern, minimalistic web interface built with Streamlit to control and view the simulation.
-*   **Headless Simulation**: The car physics runs in the background without needing a native window, making it perfect for web deployments.
-*   **Real-time Analytics**: Stick charts and metrics showing fitness progression, generation count, and population stats.
-*   **Modular Codebase**: Clean architecture with separated logic (`src/`), configuration (`config/`), and UI (`dashboard/`).
-*   **NEAT Integration**: Full implementation of genetic algorithms (mutation, crossover, speciation).
+- **Premium Dashboard**: A minimalist, glassmorphism-based web interface built with Streamlit.
+- **NEAT Evolution**: Full implementation of neuroevolution including mutation, crossover, and speciation.
+- **Headless Engine**: Physics core runs independently of display, optimized for real-time web streaming.
+- **Modular Design**: Professionally refactored architecture for clarity and extensibility.
+- **Theme-Aware**: Dashboard automatically adapts to light and dark browser modes.
 
 ## 📂 Project Structure
 
 ```text
-├── assets/          # Images and resources
-├── config/          # Configuration files (NEAT config, variables)
-├── dashboard/       # Streamlit dashboard code (app.py, reporter.py)
-├── src/             # Core simulation logic (car, road, world, etc.)
-├── main.py          # Legacy entry point for command line
-└── requirements.txt # Project dependencies
+├── assets/          # Sprites and visual resources
+├── config/          # Centralized constants and NEAT configuration
+├── engine/          # Core physics, simulation logic, and NN visualizers
+├── web/             # Modern dashboard interface and simulation bridge
+└── main.py          # Standalone CLI simulation entry point (Legacy)
 ```
 
-## 🚀 Installation
+## 🚀 Quick Start
 
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/Taaran18/Self-Driven-Car.git
-    cd Self-Driven-Car
-    ```
+### 1. Installation
 
-2.  Install the required dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-## 🏃‍♂️ Usage
-
-### Option 1: Modern Dashboard (Recommended)
-Run the Streamlit app to view the simulation in your browser with real-time stats.
+Clone the repository and install dependencies:
 
 ```bash
-streamlit run dashboard/app.py
+git clone https://github.com/Taaranjain/Self-Driven-Car.git
+cd Self-Driven-Car
+pip install -r requirements.txt
 ```
-*   Click **▶ Start Simulation** in the sidebar.
-*   Monitor improvement in the **Analytics** tab.
 
-### Option 2: Command Line
-Run the simulation in a native Pygame window (Legacy mode).
+### 2. Launch the Dashboard
+
+Experience the simulation with real-time analytics in your browser:
+
+```bash
+streamlit run web/dashboard.py
+```
+
+> [!TIP]
+> Use the **Control Panel** in the sidebar to START/STOP the evolution process.
+
+### 3. CLI Mode
+
+Run the simulation in a native window:
 
 ```bash
 python main.py
 ```
 
-## 🧠 Neural Network inputs
-- 8 Ray-cast sensors measuring distance to road borders.
-- Current velocity.
+## 🧠 Technical Overview
 
-**Outputs:**
-- Accelerate, Brake, Turn Left, Turn Right.
+### Neural Network Inputs
 
-## 🤝 Contributing
-Contributions are welcome! Please open an issue or submit a pull request.
+- **8x Ray-cast Sensors**: Measuring distance to road boundaries.
+- **Velocity**: Current speed of the vehicle.
 
-## 📄 License
-This project is licensed under the [MIT License](LICENSE).
+### Outputs (Decisions)
+
+- **Accelerate / Brake**
+- **Turn Left / Turn Right**
+
+---
+Built with Python, Pygame, and Streamlit.
