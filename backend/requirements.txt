@@ -1,0 +1,7 @@
+fastapi==0.141.1
+uvicorn[standard]==0.54.0
+SQLAlchemy[asyncio]==2.1.0
+aiosqlite==0.22.1
+pydantic-settings==2.15.0
+neat-python==2.0.0
+numpy==2.5.3

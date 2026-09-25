@@ -1,0 +1,13 @@
+[build]
+builder = "RAILPACK"
+buildCommand = "pip install -r requirements.txt && python -m compileall -q app"
+watchPatterns = ["backend/**"]
+
+[deploy]
+startCommand = "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips '*' --ws-ping-interval 20 --ws-ping-timeout 30 --timeout-graceful-shutdown 10"
+healthcheckPath = "/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5
+numReplicas = 1
+sleepApplication = true

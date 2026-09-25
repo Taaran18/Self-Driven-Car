@@ -1,0 +1,38 @@
+import numpy as np
+
+TICKS_PER_SECOND = 30
+GRACE_TICKS = 10
+
+MAX_SPEED = 10.0
+START_SPEED = MAX_SPEED / 2
+MIN_SPEED = 0.1
+FRICTION = -0.1
+ACCELERATION = 0.2
+BRAKING = 1.0
+TURN_RATE = 2.0
+
+CAR_LENGTH = 100.0
+CAR_WIDTH = 44.0
+
+SENSOR_RANGE = 200.0
+SENSOR_ANGLES = np.arange(8) * 45.0
+SENSOR_NAMES = ["Front", "Front Right", "Right", "Rear Right", "Rear", "Rear Left", "Left", "Front Left"]
+INPUT_NAMES = [*SENSOR_NAMES, "Speed"]
+OUTPUT_NAMES = ["Accelerate", "Brake", "Turn Left", "Turn Right"]
+ACTIVATION_THRESHOLD = 0.5
+
+FALL_BEHIND_LIMIT = 200.0
+PROGRESS_SCALE = 100.0
+ELIMINATION_PENALTY = 1.0
+
+SEGMENT_LENGTH = 200.0
+POINTS_PER_SEGMENT = 15
+MAX_SLOPE = 1.0
+LOOKAHEAD = 1800.0
+RUNOUT = 800.0
+TRAIL = 700.0
+
+TRACK_WIDTHS = {"wide": 260.0, "standard": 200.0, "narrow": 160.0}
+TRACK_CURVINESS = {"gentle": 150.0, "standard": 300.0, "twisty": 450.0}
+TRACK_LENGTHS = {"short": 6000.0, "medium": 12000.0, "long": 24000.0}
+MIN_AVERAGE_SPEED = 3.0
