@@ -9,6 +9,7 @@ import {
   Flag,
   Gauge,
   History,
+  Play,
   Radar,
   SlidersHorizontal,
   Square,
@@ -29,6 +30,7 @@ import { useSimulation } from "@/hooks/use-simulation"
 import { cn } from "@/lib/cn"
 import { formatFitness, formatNumber } from "@/lib/format"
 import { updatePreferences, usePreferences } from "@/lib/preferences"
+import { useUsage } from "@/lib/usage"
 import type { SimSnapshot } from "@/lib/simulation/controller"
 import type { GenerationMessage } from "@/lib/simulation/types"
 import type { RunConfig } from "@/lib/types"
@@ -36,7 +38,7 @@ import { CodePanel } from "./code-panel"
 import { ControlBar } from "./control-bar"
 import { NetworkView } from "./network-view"
 import { defaultConfig } from "./options"
-import { RunSetup } from "./run-setup"
+import { RunSetup, UsageNote } from "./run-setup"
 import { StageOverlay } from "./stage-overlay"
 import { TrackCanvas } from "./track-canvas"
 
@@ -64,6 +66,8 @@ export function SimulatorView() {
   const population =
     generation?.population ?? run?.config.population_size ?? effectiveConfig.population_size
   const away = useAwayPause(controller, phase)
+  const usage = useUsage()
+  const outOfRuns = usage.live === true && usage.left_today <= 0
   const trackRef = useRef<HTMLDivElement>(null)
 
   const runId = run?.run_id
@@ -262,12 +266,15 @@ export function SimulatorView() {
                 <NetworkView
                   network={snapshot.network}
                   values={frame?.trace.think.nodes}
-                  height={400}
+                  decisions={frame?.trace.decide}
+                  flowing={phase === "running"}
+                  height={560}
                 />
               </div>
               <p className="text-xs leading-relaxed text-fg-subtle">
-                Line thickness shows how strong a connection is. Blue connections pass a signal on,
-                red ones push it the other way. Hidden neurons appear when evolution adds them.
+                Each connection is a weight. Blue ones excite the next neuron and red ones inhibit
+                it, and thicker lines are stronger. Moving dashes show the signals flowing right
+                now, and an output marked ON is the action the car is taking.
               </p>
             </div>
           ) : null}
@@ -283,6 +290,50 @@ export function SimulatorView() {
           ) : null}
           {tab === "history" ? <HistoryPanel history={history} /> : null}
         </TabPanel>
+        <div
+          data-inspector-footer
+          className="border-t border-border bg-surface-2 px-4 py-3 sm:px-5 lg:flex lg:h-[100px] lg:shrink-0 lg:flex-col lg:justify-center"
+        >
+          {active ? (
+            <dl className="grid grid-cols-3 gap-3 text-center">
+              <div>
+                <dt className="text-xs text-fg-subtle">Generation</dt>
+                <dd className="tabular text-lg font-bold text-fg">
+                  {generation ? generation.generation + 1 : "—"}
+                  <span className="text-sm font-medium text-fg-subtle">
+                    {run ? ` / ${run.config.max_generations}` : ""}
+                  </span>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs text-fg-subtle">Driving</dt>
+                <dd className="tabular text-lg font-bold text-fg">
+                  {frame?.alive ?? population}
+                  <span className="text-sm font-medium text-fg-subtle"> / {population}</span>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs text-fg-subtle">Best Ever</dt>
+                <dd className="tabular text-lg font-bold text-fg">
+                  {formatFitness(snapshot.bestEver)}
+                </dd>
+              </div>
+            </dl>
+          ) : (
+            <div className="space-y-2">
+              <Button
+                className="w-full"
+                onClick={start}
+                loading={connecting}
+                loadingText={phase === "waking" ? "Waking Server" : "Starting"}
+                disabled={outOfRuns}
+              >
+                <Play className="size-4" /> Start Training
+              </Button>
+              <UsageNote />
+            </div>
+          )}
+        </div>
       </aside>
 
       <Dialog

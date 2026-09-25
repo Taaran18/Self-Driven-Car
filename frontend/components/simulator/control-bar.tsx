@@ -68,7 +68,7 @@ export function ControlBar({
   }
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-surface-2 px-3 py-3 sm:px-4">
+    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-surface-2 px-3 py-3 sm:px-4 lg:h-[100px] lg:shrink-0 lg:content-center">
       <div className="flex flex-wrap items-center gap-2">
         {phase === "running" ? (
           <Button onClick={onPause} aria-keyshortcuts="Space">
@@ -79,9 +79,19 @@ export function ControlBar({
             <Play className="size-4" /> Resume
           </Button>
         ) : (
-          <Button onClick={onStart} loading={starting} loadingText="Starting">
-            <Play className="size-4" /> Start Training
-          </Button>
+          <>
+            <Button
+              onClick={onStart}
+              loading={starting}
+              loadingText="Starting"
+              className="lg:hidden"
+            >
+              <Play className="size-4" /> Start Training
+            </Button>
+            <Button variant="outline" disabled className="hidden lg:inline-flex">
+              <Pause className="size-4" /> Pause
+            </Button>
+          </>
         )}
         <Button
           variant="outline"

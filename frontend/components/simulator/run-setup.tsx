@@ -211,42 +211,23 @@ export function RunSetup({
         ) : null}
       </div>
 
-      <div className="space-y-3 border-t border-border pt-5">
-        <Button
-          type="submit"
-          size="lg"
-          className="w-full"
-          loading={busy}
-          loadingText={busyLabel}
-          disabled={outOfRuns}
-        >
-          <Play className="size-5" /> Start Training
-        </Button>
-        <p className="text-center text-xs leading-relaxed text-fg-subtle" aria-live="polite">
-          {outOfRuns ? (
-            <>
-              You&apos;ve used today&apos;s {usage.runs_per_day} free runs.{" "}
-              {usage.day_resets_at ? `More at ${formatDateTime(usage.day_resets_at)}.` : null}{" "}
-              <Link
-                href="/settings?tab=usage"
-                className="font-semibold text-primary hover:underline"
-              >
-                See Usage
-              </Link>
-            </>
-          ) : usage.live ? (
-            <>
-              Uses 1 of your free runs · {usage.left_today} left today, {usage.left_this_week} this
-              week.
-            </>
-          ) : (
-            <>
-              Free trial: {usage.runs_per_day} runs a day, {usage.runs_per_week} a week. Each start
-              uses one run.
-            </>
-          )}
-        </p>
-      </div>
+      {bare ? (
+        <button type="submit" hidden aria-hidden tabIndex={-1} />
+      ) : (
+        <div className="space-y-3 border-t border-border pt-5">
+          <Button
+            type="submit"
+            size="lg"
+            className="w-full"
+            loading={busy}
+            loadingText={busyLabel}
+            disabled={outOfRuns}
+          >
+            <Play className="size-5" /> Start Training
+          </Button>
+          <UsageNote />
+        </div>
+      )}
     </form>
   )
 
@@ -261,5 +242,36 @@ export function RunSetup({
       />
       {form}
     </Card>
+  )
+}
+
+export function UsageNote({ className }: { className?: string }) {
+  const usage = useUsage()
+  const outOfRuns = usage.live === true && usage.left_today <= 0
+  return (
+    <p
+      className={cn("text-center text-xs leading-relaxed text-fg-subtle", className)}
+      aria-live="polite"
+    >
+      {outOfRuns ? (
+        <>
+          You&apos;ve used today&apos;s {usage.runs_per_day} free runs.{" "}
+          {usage.day_resets_at ? `More at ${formatDateTime(usage.day_resets_at)}.` : null}{" "}
+          <Link href="/settings?tab=usage" className="font-semibold text-primary hover:underline">
+            See Usage
+          </Link>
+        </>
+      ) : usage.live ? (
+        <>
+          Uses 1 of your free runs · {usage.left_today} left today, {usage.left_this_week} this
+          week.
+        </>
+      ) : (
+        <>
+          Free trial: {usage.runs_per_day} runs a day, {usage.runs_per_week} a week. Each start uses
+          one run.
+        </>
+      )}
+    </p>
   )
 }

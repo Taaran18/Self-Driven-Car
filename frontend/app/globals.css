@@ -240,6 +240,15 @@
     transform: none;
   }
 
+  .nn-flow {
+    stroke-dasharray: 4 8;
+    animation: nn-flow 0.9s linear infinite;
+  }
+
+  .nn-flow-paused {
+    animation-play-state: paused;
+  }
+
   .road-dash {
     background-image: linear-gradient(to bottom, var(--track-lane) 50%, transparent 50%);
     background-size: 100% 28px;
@@ -276,6 +285,12 @@
   }
   to {
     background-position-y: 28px;
+  }
+}
+
+@keyframes nn-flow {
+  to {
+    stroke-dashoffset: -24;
   }
 }
 
